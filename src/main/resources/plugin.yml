@@ -1,0 +1,23 @@
+name: CodingMusic
+version: 1.4.7
+description: Share real musics to your player
+api-version: 1.15
+author: Anthony (Rosstail) Bac, Jummiy (Escias) Lai, Théovaddi (Frigeen) Moutti
+website: https://www.spigotmc.org/resources/
+softdepend:
+  - WorldGuard
+main: fr.rosstail.codingmusic.CodingMusic
+commands:
+  music:
+    description: test command
+    usage: /music
+    permission: music.own
+    permission-message: You don't have permission !
+permissions:
+  music.own:
+    default: true
+  music.*:
+    default: op
+    description: Gives all CodingMusic plugin permissions
+    children:
+      music.own: true

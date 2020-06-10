@@ -1,0 +1,13 @@
+mysql:
+  active: false
+  host: "localhost"
+  port: 3306
+  database: "database_name"
+  username: "root"
+  password: ""
+  delay-between-request: 2
+
+general:
+  lang: "en_EN"
+  use-worldguard: false #works only for Worldguard 7+
+  use-action-bar-for-actions: true
