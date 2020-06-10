@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb1738df-a013-4059-b775-1ab636f451d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusicCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/GetSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/GetSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerConnect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,25 +83,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591717332372" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1591787582914">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1591790902346">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591787582914" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1591787582914">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902346" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1591790902345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591787582914" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1591787582914">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902345" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1591790902345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591787582914" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1591787582914">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902345" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1591790902345">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591787582914" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591782065272">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902345" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591790773082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591782065272" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591790773082" />
   </component>
 </project>
