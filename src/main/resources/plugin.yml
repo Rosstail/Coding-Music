@@ -2,7 +2,7 @@ name: CodingMusic
 version: 1.4.7
 description: Share real musics to your player
 api-version: 1.15
-author: Anthony (Rosstail) Bac, Jummiy (Escias) Lai, Théovaddi (Frigeen) Moutti
+author: Anthony (Rosstail) Bac, Jimmy (Escias) Lai, Theovadi (Frigeen) Moutty
 website: https://www.spigotmc.org/resources/
 softdepend:
   - WorldGuard

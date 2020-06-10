@@ -18,6 +18,9 @@ public class CodingMusic extends JavaPlugin implements Listener {
     public String host, database, username, password;
     public int port;
 
+    /**
+     * Actions when plugin is enabled
+     */
     @Override
     public void onEnable() {
         System.out.println("PLUGINMUSIC ON");
@@ -31,9 +34,12 @@ public class CodingMusic extends JavaPlugin implements Listener {
         createLangFiles();
         Bukkit.getPluginManager().registerEvents(new PlayerConnect(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerMove(this), this);
-        this.getCommand("music").setExecutor(new CodingMusicCommands());
+        this.getCommand("music").setExecutor(new CodingMusicCommands(this));
     }
 
+    /**
+     * Prepare init tables for MySQL
+     */
     private void prepareConnection() {
         host = this.getConfig().getString("mysql.host");
         database = this.getConfig().getString("mysql.database");
@@ -52,6 +58,11 @@ public class CodingMusic extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Create database connection if she doesn't exists
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public void openConnection() throws SQLException, ClassNotFoundException {
         if (connection != null && !connection.isClosed()) {
             return;
@@ -66,20 +77,23 @@ public class CodingMusic extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Create tables in database
+     */
     public void setTableToDataBase() {
+        setPlayersTable();
+        setUsersTable();
+        setTracksTable();
+    }
+
+    /**
+     * Create players table for INGAME players
+     */
+    public void setPlayersTable() {
         String request = "CREATE TABLE IF NOT EXISTS CODINGMUSIC_Ig_Users (UUID varchar(40) UNIQUE NOT NULL," +
-        " NickName varchar(16) UNIQUE NOT NULL," +
-        " Location varchar(30) NOT NULL," +
-        " Is_Online boolean NOT NULL);\n"; /*+
-        " CREATE TABLE IF NOT EXISTS CODINGMUSIC_Web_Users (ID int PRIMARY KEY AUTO_INCREMENT," +
-        " NickName varchar(16) UNIQUE NOT NULL," +
-        " Mail_Adress varchar(50) UNIQUE NOT NULL," +
-        " PassWord varchar(50) NOT NULL);\n" +
-        " CREATE TABLE IF NOT EXISTS CODINGMUSIC_Tracks (ID int PRIMARY KEY AUTO_INCREMENT," +
-        " Name varchar(30) NOT NULL," +
-        " Link varchar(100) NOT NULL," +
-        " Source int," +
-        " Location varchar(100) NOT NULL);";*/
+                "NickName varchar(16) UNIQUE NOT NULL," +
+                "Location varchar(30) NOT NULL," +
+                "Is_Online boolean NOT NULL);";
 
         System.out.println(request);
         try {
@@ -94,6 +108,47 @@ public class CodingMusic extends JavaPlugin implements Listener {
     }
 
     /**
+     * Create users table for website users
+     */
+    public void setUsersTable() {
+        String request = "CREATE TABLE IF NOT EXISTS CODINGMUSIC_Web_Users (ID int PRIMARY KEY AUTO_INCREMENT," +
+        " NickName varchar(16) UNIQUE NOT NULL," +
+        " Mail_Adress varchar(50) UNIQUE NOT NULL," +
+        " PassWord varchar(50) NOT NULL);";
+
+        System.out.println(request);
+        try {
+            if (connection != null && !connection.isClosed()) {
+                Statement statement = connection.createStatement();
+                statement.execute(request);
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create tracks table for musics list
+     */
+    public void setTracksTable() {
+        String request = "CREATE TABLE IF NOT EXISTS CODINGMUSIC_Tracks (ID int PRIMARY KEY AUTO_INCREMENT," +
+                " Title varchar(30) NOT NULL," +
+                " Link varchar(100) NOT NULL," +
+                " Source int," +
+                " Location varchar(100) NOT NULL);";
+        System.out.println(request);
+        try {
+            if (connection != null && !connection.isClosed()) {
+                Statement statement = connection.createStatement();
+                statement.execute(request);
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
      * Create the subfolder and files for languages
      */
     public void createLangFiles() {
@@ -106,6 +161,9 @@ public class CodingMusic extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Create en_EN.yml lang file
+     */
     private void setEnglishLang() {
         File file = new File(this.getDataFolder(), "lang/en_EN.yml");
         try {
@@ -124,6 +182,9 @@ public class CodingMusic extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Create fr_FR.yml lang file
+     */
     private void setFrenchLang() {
         File file = new File(this.getDataFolder(), "lang/fr_FR.yml");
         try {
@@ -142,6 +203,9 @@ public class CodingMusic extends JavaPlugin implements Listener {
         }
     }
 
+    /**
+     * Actions when plugin / server shutting down
+     */
     @Override
     public void onDisable() {
         System.out.println("PLUGINMUSIC OFF");

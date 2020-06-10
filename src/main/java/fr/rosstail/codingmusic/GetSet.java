@@ -1,10 +1,7 @@
 package fr.rosstail.codingmusic;
 
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.*;
 
 public class GetSet {
@@ -16,6 +13,10 @@ public class GetSet {
     private final int port;
     private final CodingMusic plugin;
 
+    /**
+     * Constructor
+     * @param codingMusic
+     */
     GetSet(CodingMusic codingMusic) {
         this.plugin = codingMusic;
         this.host = codingMusic.getConfig().getString("mysql.host");
@@ -31,6 +32,11 @@ public class GetSet {
 
     }
 
+    /**
+     * Check if player is already inside CODINGMUSIC_Ig_Users table in databas
+     * @param player
+     * @return
+     */
     public boolean ifPlayerExistsInDTB(Player player) {
         try {
             if (plugin.connection != null && !plugin.connection.isClosed()) {
@@ -48,6 +54,10 @@ public class GetSet {
         return false;
     }
 
+    /**
+     * Create default values for player in CODINGMUSIC_Ig_users table in database
+     * @param player
+     */
     public void createPlayerData(Player player) {
         String uuid = player.getUniqueId().toString();
         String nickName = player.getName();
@@ -73,6 +83,10 @@ public class GetSet {
         }
     }
 
+    /**
+     * Mark the player as connected in database
+     * @param player
+     */
     public void setPlayerOnlineStatus(Player player) {
         String uuid = player.getUniqueId().toString();
         Boolean isOnline = player.isOnline();
@@ -93,6 +107,10 @@ public class GetSet {
         }
     }
 
+    /**
+     * Set the player offline in the database
+     * @param player
+     */
     public void setPlayerOfflineStatus(Player player) {
         String uuid = player.getUniqueId().toString();
         String query = "UPDATE CODINGMUSIC_Ig_Users SET Is_Online = ? WHERE UUID = ?;";
@@ -112,27 +130,36 @@ public class GetSet {
         }
     }
 
+    /**
+     * Get and return the player location in database
+     * @param player
+     * @return
+     */
     public String getPlayerLocation(Player player) {
         String uuid = player.getUniqueId().toString();
         String query = "SELECT Location FROM CODINGMUSIC_Ig_Users WHERE UUID = '" + uuid + "';";
         String location = null;
         try {
-                if (plugin.connection != null && !plugin.connection.isClosed()) {
-                    Statement statement = plugin.connection.createStatement();
-                    ResultSet result = statement.executeQuery(query);
-                    while (result.next()) {
-                        location = result.getString("Location");
-                    }
-                    statement.close();
-                    System.out.println(location);
-                    return location;
+            if (plugin.connection != null && !plugin.connection.isClosed()) {
+                Statement statement = plugin.connection.createStatement();
+                ResultSet result = statement.executeQuery(query);
+                while (result.next()) {
+                    location = result.getString("Location");
                 }
+                statement.close();
+                return location;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * Update player location into database
+     * @param player
+     * @param loc
+     */
     public void setPlayerLocation(Player player, String loc) {
         String uuid = player.getUniqueId().toString();
         String query = "UPDATE CODINGMUSIC_Ig_Users SET Location = ? WHERE UUID = ?;";
@@ -142,6 +169,27 @@ public class GetSet {
 
                 preparedStatement.setString(1, loc);
                 preparedStatement.setString(2, uuid);
+
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setTrack(String[] strings) {
+        String query = "INSERT INTO CODINGMUSIC_Tracks (Title, Link, Source, Location)\n" +
+                "VALUES (?, ?, ?, ?);";
+        try {
+            if (plugin.connection != null && !plugin.connection.isClosed()) {
+                PreparedStatement preparedStatement = plugin.connection.prepareStatement(query);
+
+                preparedStatement.setString(1, strings[1]);
+                preparedStatement.setString(2, strings[4]);
+                preparedStatement.setInt(3, Integer.parseInt(strings[2]));
+                preparedStatement.setString(4, strings[3]);
 
                 preparedStatement.executeUpdate();
                 preparedStatement.close();

@@ -10,6 +10,10 @@ public class PlayerMove implements Listener {
     private final long updateDelay;
     private final GetSet getSet;
 
+    /**
+     * Constructor
+     * @param plugin
+     */
     public PlayerMove(CodingMusic plugin) {
         this.plugin = plugin;
         this.updateDelay = this.plugin.getConfig().getLong("mysql.delay-between-request") * 1000;
@@ -18,6 +22,10 @@ public class PlayerMove implements Listener {
 
     long buffer = 0;
 
+    /**
+     * Actions when player move/rotate
+     * @param event
+     */
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
@@ -30,16 +38,10 @@ public class PlayerMove implements Listener {
 
 
         if (timestamp > buffer) {
+            buffer = timestamp + updateDelay;
             if (!pLoc.equals(getSet.getPlayerLocation(player))) {
-                player.sendMessage(pLoc);
                 getSet.setPlayerLocation(player, pLoc);
-                buffer = timestamp + updateDelay;
-            } else {
-                player.sendMessage("Tu n'as pas changé de bloc");
             }
-        } else {
-            player.sendMessage("cooldown");
         }
-
     }
 }
