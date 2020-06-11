@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bb1738df-a013-4059-b775-1ab636f451d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusicCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/CodingMusicCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/GetSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/GetSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/rosstail/codingmusic/PlayerMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +35,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Karma" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -71,37 +75,45 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1591631553559" />
-    <state x="765" y="237" key="#com.intellij.ide.util.MemberChooser" timestamp="1591632417179">
+    <state x="765" y="237" key="#com.intellij.ide.util.MemberChooser" timestamp="1591797913129">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591632417179" />
+    <state x="765" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591797913129" />
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591630868731">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591630868731" />
-    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1591717332373">
+    <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1591798012846">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591717332372" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1591790902346">
+    <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591798012846" />
+    <state width="1877" height="181" key="GridCell.Tab.0.bottom" timestamp="1591885674643">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902346" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1591790902345">
+    <state width="1877" height="181" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591885674643" />
+    <state width="1877" height="181" key="GridCell.Tab.0.center" timestamp="1591885674642">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902345" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1591790902345">
+    <state width="1877" height="181" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591885674642" />
+    <state width="1877" height="181" key="GridCell.Tab.0.left" timestamp="1591885674642">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902345" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1591790902345">
+    <state width="1877" height="181" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591885674642" />
+    <state width="1877" height="181" key="GridCell.Tab.0.right" timestamp="1591885674642">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591790902345" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591790773082">
+    <state width="1877" height="181" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591885674642" />
+    <state x="92" y="92" width="1736" height="856" key="dock-window-1" timestamp="1591794052331">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591790773082" />
+    <state x="92" y="92" width="1736" height="856" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1591794052331" />
+    <state x="92" y="92" width="1736" height="856" key="dock-window-2" timestamp="1591794052331">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="dock-window-2/0.0.1920.1040@0.0.1920.1040" timestamp="1591794052331" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591794409719">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591794409719" />
   </component>
 </project>

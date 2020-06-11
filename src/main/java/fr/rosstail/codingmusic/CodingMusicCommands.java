@@ -52,8 +52,7 @@ public class CodingMusicCommands implements CommandExecutor {
                         commandSender.sendMessage("Musique ajoutée à la région.");
                     }
                     getSet.setTrack(strings);
-                } else if (strings.length == 8 || strings.length == 10){
-
+                } else if (strings.length == 8 || strings.length == 10) {
                     try {
                         for (int i = 4; i < strings.length - 1; i++) {
                             Integer.parseInt(strings[i]);

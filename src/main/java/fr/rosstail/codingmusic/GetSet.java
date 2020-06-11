@@ -29,7 +29,6 @@ public class GetSet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -80,6 +79,56 @@ public class GetSet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            createPlayerMusicData(player);
+        }
+    }
+
+    public void createPlayerMusicData(Player player) {
+        String uuid = player.getUniqueId().toString();
+        String nickName = player.getName();
+        WGPreps wgPreps = new WGPreps();
+
+        String musicList = wgPreps.checkMusicFlagList(player).toString();
+        musicList = musicList.replaceAll("\\[", "").replaceAll("]", "");
+        try {
+            if (plugin.connection != null && !plugin.connection.isClosed()) {
+                PreparedStatement preparedStatement = plugin.connection.prepareStatement("INSERT INTO CODINGMUSIC_Region_Link (UUID, NickName, Musics)\n" +
+                        "VALUES (?, ?, ?);");
+
+                preparedStatement.setString(1, uuid);
+                preparedStatement.setString(2, nickName);
+                preparedStatement.setString(3, musicList);
+
+                preparedStatement.execute();
+                preparedStatement.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setPlayerMusicList(Player player) {
+        String uuid = player.getUniqueId().toString();
+        String nickName = player.getName();
+        WGPreps wgPreps = new WGPreps();
+        String musicList = wgPreps.checkMusicFlagList(player).toString();
+        musicList = musicList.replaceAll("\\[", "").replaceAll("]", "");
+        String query = "UPDATE CODINGMUSIC_Region_Link SET NickName = ?, Musics = ? WHERE UUID = ?;";
+        try {
+            if (plugin.connection != null && !plugin.connection.isClosed()) {
+                PreparedStatement preparedStatement = plugin.connection.prepareStatement(query);
+
+                preparedStatement.setString(1, nickName);
+                preparedStatement.setString(2, musicList);
+                preparedStatement.setString(3, uuid);
+
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

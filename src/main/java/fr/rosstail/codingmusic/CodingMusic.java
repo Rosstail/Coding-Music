@@ -18,6 +18,13 @@ public class CodingMusic extends JavaPlugin implements Listener {
     public String host, database, username, password;
     public int port;
 
+    @Override
+    public void onLoad() {
+        if (Bukkit.getServer().getPluginManager().getPlugin("WorldGuard") != null) {
+            new WGPreps().worldGuardHook();
+        }
+    }
+
     /**
      * Actions when plugin is enabled
      */
@@ -84,6 +91,7 @@ public class CodingMusic extends JavaPlugin implements Listener {
         setPlayersTable();
         setUsersTable();
         setTracksTable();
+        setRegionLinkTable();
     }
 
     /**
@@ -94,8 +102,6 @@ public class CodingMusic extends JavaPlugin implements Listener {
                 "NickName varchar(16) UNIQUE NOT NULL," +
                 "Location varchar(30) NOT NULL," +
                 "Is_Online boolean NOT NULL);";
-
-        System.out.println(request);
         try {
             if (connection != null && !connection.isClosed()) {
                 Statement statement = connection.createStatement();
@@ -116,7 +122,6 @@ public class CodingMusic extends JavaPlugin implements Listener {
         " Mail_Adress varchar(50) UNIQUE NOT NULL," +
         " PassWord varchar(50) NOT NULL);";
 
-        System.out.println(request);
         try {
             if (connection != null && !connection.isClosed()) {
                 Statement statement = connection.createStatement();
@@ -137,7 +142,6 @@ public class CodingMusic extends JavaPlugin implements Listener {
                 " Link varchar(100) NOT NULL," +
                 " Source int," +
                 " Location varchar(100) NOT NULL);";
-        System.out.println(request);
         try {
             if (connection != null && !connection.isClosed()) {
                 Statement statement = connection.createStatement();
@@ -148,6 +152,25 @@ public class CodingMusic extends JavaPlugin implements Listener {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Create region link table
+     */
+    public void setRegionLinkTable() {
+        String request = "CREATE TABLE IF NOT EXISTS CODINGMUSIC_Region_Link (UUID varchar(40) UNIQUE NOT NULL," +
+                " NickName varchar(16) NOT NULL," +
+                " Musics varchar(200) NOT NULL);";
+        try {
+            if (connection != null && !connection.isClosed()) {
+                Statement statement = connection.createStatement();
+                statement.execute(request);
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Create the subfolder and files for languages
      */

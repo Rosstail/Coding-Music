@@ -41,6 +41,7 @@ public class PlayerMove implements Listener {
             buffer = timestamp + updateDelay;
             if (!pLoc.equals(getSet.getPlayerLocation(player))) {
                 getSet.setPlayerLocation(player, pLoc);
+                getSet.setPlayerMusicList(player);
             }
         }
     }
