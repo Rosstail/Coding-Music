@@ -108,12 +108,75 @@ public class GetSet {
         }
     }
 
+    public String getplayerLocalRegions(Player player) {
+        String[] pLoc = getPlayerLocation(player).split(" ");
+
+        String list = null;
+        int pX = Integer.parseInt(pLoc[0]);
+        int pY = Integer.parseInt(pLoc[1]);
+        int pZ = Integer.parseInt(pLoc[2]);
+
+        String query = "SELECT * FROM CODINGMUSIC_Tracks;";
+        try {
+            if (plugin.connection != null && !plugin.connection.isClosed()) {
+                Statement statement = plugin.connection.createStatement();
+                ResultSet result = statement.executeQuery(query);
+                while (result.next()) {
+                    String loc;
+                    String[] tempArray;
+
+                    loc = result.getString("Location");
+                    tempArray = loc.split(" ");
+
+                    if (tempArray.length == 4) {
+                        int locX = Integer.parseInt(tempArray[0]);
+                        int locY = Integer.parseInt(tempArray[1]);
+                        int locZ = Integer.parseInt(tempArray[2]);
+                        int locR = Integer.parseInt(tempArray[3]);
+                        if (pX >= locX - locR && pX <= locX + locR) {
+                            if (pY >= locY - locR && pY <= locY + locR) {
+                                if (pZ >= locZ - locR && pZ <= locZ + locR) {
+                                    if (list != null) {
+                                        list = list + " " + result.getString("Title");;
+                                    } else {
+                                        list = result.getString("Title");
+                                    }
+                                }
+                            }
+                        }
+                    } else if (tempArray.length == 6) {
+                        int locXMin = Integer.parseInt(tempArray[0]);
+                        int locYMin = Integer.parseInt(tempArray[1]);
+                        int locZMin = Integer.parseInt(tempArray[2]);
+                        int locXmax = Integer.parseInt(tempArray[3]);
+                        int locYMax = Integer.parseInt(tempArray[4]);
+                        int locZMax = Integer.parseInt(tempArray[5]);
+                        if (pX >= locXMin && pX <= locXmax) {
+                            if (pY >= locYMin && pY <= locYMax) {
+                                if (pZ >= locZMin && pZ <= locZMax) {
+                                    if (list != null) {
+                                        list = list + " " + result.getString("Title");;
+                                    } else {
+                                        list = result.getString("Title");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public void setPlayerMusicList(Player player) {
         String uuid = player.getUniqueId().toString();
         String nickName = player.getName();
-        WGPreps wgPreps = new WGPreps();
-        String musicList = wgPreps.checkMusicFlagList(player).toString();
-        musicList = musicList.replaceAll("\\[", "").replaceAll("]", "");
+        String musicList = getPlayerWGtracks(player);
+        musicList = musicList + getplayerLocalRegions(player);
         String query = "UPDATE CODINGMUSIC_Region_Link SET NickName = ?, Musics = ? WHERE UUID = ?;";
         try {
             if (plugin.connection != null && !plugin.connection.isClosed()) {
@@ -130,6 +193,37 @@ public class GetSet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getPlayerWGtracks(Player player) {
+        WGPreps wgPreps = new WGPreps();
+        String flag = wgPreps.checkMusicFlagList(player).toString();
+        flag = flag.replaceAll("\\[", "").replaceAll("]", "");
+        String track = null;
+
+        String query = "SELECT * FROM CODINGMUSIC_Tracks WHERE Location LIKE '%" + flag + "%'";
+        try {
+
+            if (plugin.connection != null && !plugin.connection.isClosed()) {
+                Statement statement = plugin.connection.createStatement();
+                ResultSet result = statement.executeQuery(query);
+                while (result.next()) {
+                    String loc;
+                    String[] tempArray;
+
+                    loc = result.getString("Title");
+                    tempArray = loc.split(" ");
+
+                    if (tempArray.length == 1) {
+                        track = result.getString("Title") + " ";
+                    }
+                }
+                statement.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return track;
     }
 
     /**
@@ -239,6 +333,23 @@ public class GetSet {
                 preparedStatement.setString(2, strings[4]);
                 preparedStatement.setInt(3, Integer.parseInt(strings[2]));
                 preparedStatement.setString(4, strings[3]);
+
+                preparedStatement.executeUpdate();
+                preparedStatement.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTrack(String string) {
+        String query = "DELETE FROM CODINGMUSIC_Tracks WHERE Title = ?;";
+        try {
+            if (plugin.connection != null && !plugin.connection.isClosed()) {
+                PreparedStatement preparedStatement = plugin.connection.prepareStatement(query);
+
+                preparedStatement.setString(1, string);
 
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
