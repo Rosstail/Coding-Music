@@ -201,29 +201,33 @@ public class GetSet {
         flag = flag.replaceAll("\\[", "").replaceAll("]", "");
         String track = null;
 
-        String query = "SELECT * FROM CODINGMUSIC_Tracks WHERE Location LIKE '%" + flag + "%'";
-        try {
+        if (flag.length() > 0) {
+            String query = "SELECT * FROM CODINGMUSIC_Tracks WHERE Location LIKE '%" + flag + "%'";
+            try {
+                if (plugin.connection != null && !plugin.connection.isClosed()) {
+                    Statement statement = plugin.connection.createStatement();
+                    ResultSet result = statement.executeQuery(query);
+                    while (result.next()) {
+                        String loc;
+                        String[] tempArray;
 
-            if (plugin.connection != null && !plugin.connection.isClosed()) {
-                Statement statement = plugin.connection.createStatement();
-                ResultSet result = statement.executeQuery(query);
-                while (result.next()) {
-                    String loc;
-                    String[] tempArray;
+                        loc = result.getString("Title");
+                        tempArray = loc.split(" ");
 
-                    loc = result.getString("Title");
-                    tempArray = loc.split(" ");
-
-                    if (tempArray.length == 1) {
-                        track = result.getString("Title") + " ";
+                        if (tempArray.length == 1) {
+                            track = result.getString("Title") + " ";
+                        }
                     }
+                    statement.close();
                 }
-                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            if (track != null) {
+                return track;
+            }
         }
-        return track;
+        return "";
     }
 
     /**
