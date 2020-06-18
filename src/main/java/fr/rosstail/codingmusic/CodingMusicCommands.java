@@ -29,7 +29,6 @@ public class CodingMusicCommands implements CommandExecutor {
      * @return
      */
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        commandSender.sendMessage("tu as envoyé une commande basée sur /music.");
         if (strings != null) {
             if(strings.length >= 1) {
                 if (strings[0].equalsIgnoreCase("add")) {

@@ -30,7 +30,6 @@ public class CodingMusic extends JavaPlugin implements Listener {
      */
     @Override
     public void onEnable() {
-        System.out.println("PLUGINMUSIC ON");
 
         this.saveDefaultConfig();
         if (this.getConfig().getBoolean("mysql.active")) {
@@ -120,7 +119,8 @@ public class CodingMusic extends JavaPlugin implements Listener {
         String request = "CREATE TABLE IF NOT EXISTS CODINGMUSIC_Web_Users (ID int PRIMARY KEY AUTO_INCREMENT," +
         " NickName varchar(16) UNIQUE NOT NULL," +
         " Mail_Adress varchar(50) UNIQUE NOT NULL," +
-        " PassWord varchar(50) NOT NULL);";
+        " PassWord varchar(50) NOT NULL," +
+        " profilimg varchar(200) DEFAULT \"/projetweb/img/iconprofile.png\");";
 
         try {
             if (connection != null && !connection.isClosed()) {
@@ -197,6 +197,17 @@ public class CodingMusic extends JavaPlugin implements Listener {
         YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
         configuration.set("by-player-only", "[CodingMusic] This command must be send by a player.");
         configuration.set("permission-denied", "[CodingMusic] &cYou don't have permission !");
+        configuration.set("wrong-source", "[CodingMusic] &cSource must contain an int !");
+        configuration.set("add-music-syntax", "[CodingMusic] /music add [Titre] [Source] (X) (Y) (Z) [Radius] / (minX) (minY) (minZ) (maxX) (maxY) (maxZ)] [Link]");
+        configuration.set("add-music-spheric-number-error", "[CodingMusic] SOURCE, X, Y, Z and RADIUS must be INT !");
+        configuration.set("source-int-error", "[CodingMusic] SOURCE must be an INT !");
+        configuration.set("new-music-spheric-own", "[CodingMusic] Music added in a spheric area around you.");
+        configuration.set("new-music-spheric", "[CodingMusic] Music added in a spheric area.");
+        configuration.set("new-music-region", "[CodingMusic] Music added into the worldguard region.");
+        configuration.set("new-music-area", "[CodingMusic] Music added in the cuboid area.");
+        configuration.set("deleted-music", "[CodingMusic] Music <TITLE> has been successfully deleted.");
+        configuration.set("delete-music-syntax", "[CodingMusic] /music del/delete [Title1] (Title2) (Title3)...");
+
 
         try {
             configuration.save(file);
@@ -218,6 +229,16 @@ public class CodingMusic extends JavaPlugin implements Listener {
         YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
         configuration.set("by-player-only", "[CodingMusic] Cette commande doit être lancée par un joueur.");
         configuration.set("permission-denied", "[CodingMusic] &cVous n'avez pas la permission !");
+        configuration.set("wrong-source", "[CodingMusic] &cSource doit contenir un nombre entier !");
+        configuration.set("add-music-syntax", "[CodingMusic] /music add [Titre] [Source] (X) (Y) (Z) [Rayon] / (minX) (minY) (minZ) (maxX) (maxY) (maxZ)] [Lien]");
+        configuration.set("add-music-spheric-number-error", "[CodingMusic] SOURCE, X, Y, Z et RAYON doivent être un nombre entier !");
+        configuration.set("source-int-error", "[CodingMusic] SOURCE doit être un nombre entier !");
+        configuration.set("new-music-spheric-own", "[CodingMusic] Musique ajoutée dans une sphère autour de vous.");
+        configuration.set("new-music-spheric", "[CodingMusic] Musique ajoutée dans une sphère.");
+        configuration.set("new-music-region", "[CodingMusic] Musique ajoutée à la région worldguard.");
+        configuration.set("new-music-area", "[CodingMusic] Musique ajoutée au cuboid.");
+        configuration.set("deleted-music", "[CodingMusic] Musique <TITLE> supprimée avec succès.");
+        configuration.set("delete-music-syntax", "[CodingMusic] /music del/delete [Titre1] (Titre2) (Titre3)...");
 
         try {
             configuration.save(file);
@@ -231,7 +252,6 @@ public class CodingMusic extends JavaPlugin implements Listener {
      */
     @Override
     public void onDisable() {
-        System.out.println("PLUGINMUSIC OFF");
 
         try {
             connection.close();

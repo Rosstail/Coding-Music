@@ -1,16 +1,28 @@
 package fr.rosstail.codingmusic;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+
+import java.io.File;
 
 public class TracksEdit {
     private final CodingMusic plugin;
+    private final AdaptMessages adaptMessages;
     private final GetSet getSet;
+    private final File langFile;
+    private final YamlConfiguration configLang;
+    String message;
 
     TracksEdit(CodingMusic plugin) {
         this.plugin = plugin;
+        this.langFile = new File(plugin.getDataFolder(),
+                "lang/" + plugin.getConfig().getString("general.lang") + ".yml");
+        this.configLang = YamlConfiguration.loadConfiguration(langFile);
         this.getSet = new GetSet(plugin);
+        this.adaptMessages = new AdaptMessages();
     }
 
     public void addTrack(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -18,7 +30,8 @@ public class TracksEdit {
             try {
                 Integer.parseInt(strings[2]);
             } catch (NumberFormatException e) {
-                commandSender.sendMessage("SOURCE doit être un nombre !");
+                message = configLang.getString("source-error-int");
+                adaptMessages.message(commandSender, message, null);
                 return;
             }
 
@@ -28,11 +41,13 @@ public class TracksEdit {
                     if (commandSender instanceof Player) {
                         Player player = ((Player) commandSender).getPlayer();
                         strings[3] = (int) player.getLocation().getX() + " " + (int) player.getLocation().getY() + " " + (int) player.getLocation().getZ() + " " + strings[3];
-                        commandSender.sendMessage("Musique ajoutée dans une sphère autour de vous.");
+                        message = configLang.getString("new-music-spheric-player");
+                        adaptMessages.message(commandSender, message, null);
                     }
                 } catch (NumberFormatException e) {
                     strings[3] = strings[3].toLowerCase();
-                    commandSender.sendMessage("Musique ajoutée à la région.");
+                    message = configLang.getString("new-music-region");
+                    adaptMessages.message(commandSender, message, null);
                 }
                 getSet.setTrack(strings);
             } else if (strings.length == 8 || strings.length == 10) {
@@ -44,16 +59,21 @@ public class TracksEdit {
                     strings[4] = strings[strings.length - 1];
                     getSet.setTrack(strings);
                     if (strings.length == 8) {
-                        commandSender.sendMessage("Musique ajoutée dans une sphère");
+                        message = configLang.getString("new-music-spheric");
+                        adaptMessages.message(commandSender, message, null);
                     } else {
-                        commandSender.sendMessage("Musique ajoutée dans la zone donnée");
+                        message = configLang.getString("new-music-area");
+                        adaptMessages.message(commandSender, message, null);
                     }
+                    commandSender.sendMessage(message);
                 } catch (NumberFormatException e) {
-                    commandSender.sendMessage("SOURCE, X, Y, Z et RAYON doivent être un nombre !");
+                    message = configLang.getString("add-music-spheric-number-error");
+                    adaptMessages.message(commandSender, message, null);
                 }
             }
         } else {
-            commandSender.sendMessage("/music add [Titre] (X) (Y) (Z) [Rayon] / (minX) (minY) (minZ) (maxX) (maxY) (maxZ)] [Lien]");
+            message = configLang.getString("add-music-syntax");
+            commandSender.sendMessage(message);
         }
     }
 
@@ -62,10 +82,12 @@ public class TracksEdit {
         if (strings.length >= 2) {
             for (int i = 1; i <= strings.length - 1; i++) {
                 getSet.deleteTrack(strings[i]);
-                commandSender.sendMessage("Musique " + strings[i] + " supprimmée avec succès.");
+                message = configLang.getString("deleted-music");
+                adaptMessages.message(commandSender, message, strings[i]);
             }
         } else {
-            commandSender.sendMessage("/music del/delete [Titre] [Titre] [Titre]");
+            message = configLang.getString("delete-music-syntax");
+            adaptMessages.message(commandSender, message, null);
         }
     }
 }
