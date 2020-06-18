@@ -41,7 +41,7 @@ public class GetSet {
             if (plugin.connection != null && !plugin.connection.isClosed()) {
                 Statement statement = plugin.connection.createStatement();
                 String UUID = String.valueOf(player.getUniqueId());
-                ResultSet result = statement.executeQuery("SELECT UUID FROM CODINGMUSIC_Ig_users WHERE UUID = '" + UUID + "';");
+                ResultSet result = statement.executeQuery("SELECT UUID FROM CODINGMUSIC_Ig_Users WHERE UUID = '" + UUID + "';");
                 if (result.next()) {
                     return true;
                 }
@@ -54,7 +54,7 @@ public class GetSet {
     }
 
     /**
-     * Create default values for player in CODINGMUSIC_Ig_users table in database
+     * Create default values for player in CODINGMUSIC_Ig_Users table in database
      * @param player
      */
     public void createPlayerData(Player player) {
